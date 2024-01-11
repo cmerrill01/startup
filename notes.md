@@ -1,7 +1,8 @@
+# Notes
 
-# Git and Github
+## Git and Github
 
-## 11 January 2024
+### 11 January 2024
 
 Main purposes of using GitHub:
 - Preserve your work
