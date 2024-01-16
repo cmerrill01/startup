@@ -35,6 +35,35 @@ EconoMentor gamifies essential concepts of economics to make them accessible to 
 
 ### How I Will Use Each Technology
 
+Authentication:
+- A user must register or login before creating a new game or viewing the leaderboard
+- The following account data is persistently and securely stored in a database:
+  - username
+  - password
+
+Database data:
+- The database stores data from all current and completed games, including the following fields:
+  - username
+  - game_name
+  - game_id
+  - current_score
+  - current_round
+  - fixed_cost
+  - variable_cost_per_unit
+  - demand_curve_intercept
+  - demand_curve_slope
+- Users can view the following data for completed games (current_round = 13) on the leaderboard:
+  - username
+  - game_name
+  - current_score
+
+ Websocket data:
+ - The application will use websocket to send the client the following information after each round of play:
+   - Total revenue
+   - Total cost
+   - Total profit
+   - Updated score
+
 ### Design Images
 
 Demonstration of login user interface
