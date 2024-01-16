@@ -10,6 +10,29 @@ EconoMentor gamifies essential concepts of economics to make them accessible to 
 
 ### Key Features
 
+- Secure login authentication over HTTPS
+- Ability to start a new game, which includes the following features:
+  - Generates a random demand curve
+  - Generates a random fixed cost level and variable cost curve
+  - Generates a recommended quantity range
+- Display of key information during gameplay, including:
+  - Current value of assets (current score)
+  - Current month (round of the game)
+  - Recommended quantity range
+  - Fixed cost
+  - Variable cost per unit produced
+- User inputs for the following during gameplay:
+  - Price
+  - Quantity
+- An option to submit price and quantity for each round of gameplay
+- Display of results following each round's submission, including:
+  - Total revenue
+  - Total cost
+  - Total profit
+- Update current asset value (current score) after every round
+- Final score persistently stored
+- Post final score after twelve rounds to a personal scorecard and/or leaderboard
+
 ### How I Will Use Each Technology
 
 ### Design Images
