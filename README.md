@@ -10,6 +10,70 @@ EconoMentor gamifies essential concepts of economics to make them accessible to 
 
 ### Key Features
 
+- Secure login authentication over HTTPS
+- Ability to start a new game, which includes the following features:
+  - Generates a random demand curve
+  - Generates a random fixed cost level and variable cost curve
+  - Generates a recommended quantity range
+- Display of key information during gameplay, including:
+  - Current value of assets (current score)
+  - Current month (round of the game)
+  - Recommended quantity range
+  - Fixed cost
+  - Variable cost per unit produced
+- User inputs for the following during gameplay:
+  - Price
+  - Quantity
+- An option to submit price and quantity for each round of gameplay
+- Display of results following each round's submission, including:
+  - Total revenue
+  - Total cost
+  - Total profit
+- Update current asset value (current score) after every round
+- Final score persistently stored
+- Post final score after twelve rounds to a personal scorecard and/or leaderboard
+
 ### How I Will Use Each Technology
 
+Authentication:
+- A user must register or login before creating a new game or viewing the leaderboard
+- The following account data is persistently and securely stored in a database:
+  - username
+  - password
+
+Database data:
+- The database stores data from all current and completed games, including the following fields:
+  - username
+  - game_name
+  - game_id
+  - current_score
+  - current_round
+  - fixed_cost
+  - variable_cost_per_unit
+  - demand_curve_intercept
+  - demand_curve_slope
+- Users can view the following data for completed games (current_round = 13) on the leaderboard:
+  - username
+  - game_name
+  - current_score
+
+ Websocket data:
+ - The application will use websocket to send the client the following information after each round of play:
+   - Total revenue
+   - Total cost
+   - Total profit
+   - Updated score
+
 ### Design Images
+
+Demonstration of login user interface
+![Image of login user interface with options to register a new account or login to a current account](/assets/images/economentor_login.PNG)
+
+Demonstration of "How to Play" page
+![Image of "How to Play" page](/assets/images/economentor_howtoplay.PNG)
+
+Demonstration of gameplay user interface
+![Image of gameplay user interface showing key information and providing input options and a "submit" button](/assets/images/economentor_gameplay.PNG)
+
+Demonstration of leaderboard page
+![Image of the leaderboard showing a table with the users and their high scores](/assets/images/economentor_leaderboard.PNG)
