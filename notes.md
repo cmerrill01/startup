@@ -21,3 +21,13 @@ Four-step process for using git:
 2. Work on a small piece of code to implement something cohesive
 3. Commit and push
 4. Repeat
+
+## AWS
+
+### 19 January 2024
+
+IP Address: `3.92.129.185`
+
+To ssh into server: `ssh -i [key pair file] ubuntu@[ip address]`
+
+Root Domain: `chasemerrill-startup.click`
