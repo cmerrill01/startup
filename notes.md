@@ -28,6 +28,14 @@ Four-step process for using git:
 
 IP Address: `3.92.129.185`
 
-To ssh into server: `ssh -i [key pair file] ubuntu@[ip address]`
+To ssh into server: `ssh -i [key pair file] ubuntu@[ip address]` or `ssh - i [key pair file] ubuntu@[domainname]`
 
 Root Domain: `chasemerrill-startup.click`
+
+## HTTPS
+
+### 22 January 2024
+
+Caddy is a service that "serves up" files using HTTPS.
+
+HTTPS uses TLS technology to perform a "handshake". It verifies whether the web certificate provided by the server is legitimate.
