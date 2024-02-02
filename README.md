@@ -77,3 +77,16 @@ Demonstration of gameplay user interface
 
 Demonstration of leaderboard page
 ![Image of the leaderboard showing a table with the users and their high scores](/assets/images/economentor_leaderboard.PNG)
+
+## HTML Deliverable
+
+For this deliverable, I created the underlying structure of my web application using HTML.
+
+- *HTML Pages:* The web application includes four web pages: first, the index.html page that serves as the home/login page; second, the instructions.html page that explains how to play the game; third, the gameplay.html page where game play takes place; and fourth, the scores.html page where users can view the five all-time highest scores
+- *Links:* All pages are accessible via the navigation bar.
+- *Textual Content:* Text is used in the How to Play page to explain how the application works
+- *Images:* An image hosted in the server is shown on the How to Play page.
+- *Login:* Forms are present for account creation and account login.
+- *Name Display:* A placeholder for the user's username is shown in the navigation bar on the gameplay and scores pages.
+- *Database Data Placeholder:* The table in the Scores page will pull data from the database
+- *WebSocket Data Placeholder:* The table labeled "Currently Playing" on the gameplay page will show data pushed from the server regarding who is playing and what their score is.
