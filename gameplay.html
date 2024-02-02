@@ -23,12 +23,7 @@
 
         <main>
             <section id="gameplay-data">
-                <!--- - Display of key information during gameplay, including:
-                    - Current value of assets (current score)
-                    - Current month (round of the game)
-                    - Recommended quantity range
-                    - Fixed cost
-                    - Variable cost per unit produced --->
+                <h1>Gameplay Data</h1>
                 <div id="current-assets-display">
                     Current assets: <span id="current-assets">$400</span>
                 </div>
@@ -46,7 +41,12 @@
                 </div>            
             </section>
             <section id="user-input">
-
+                <h1>Input Price and Quantity</h1>
+                <form method="post" action="gameplay.html">
+                    <input type="number" id="price" placeholder="Enter price" />
+                    <input type="number" id="quantity" placeholder="Enter quantity" />
+                    <button type="submit">Submit price and quantity</button>
+                </form>
             </section>
             <section id="last-round-result">
                 
@@ -55,7 +55,7 @@
 
         <footer>
             <hr />
-            <p>Economentor was created by Chase Merrill at Brigham Young University for C S 260: Web Programming, Winter 2024</p>
+            <p>EconoMentor was created by Chase Merrill at Brigham Young University for C S 260: Web Programming, Winter 2024</p>
             <p><a href="https://github.com/cmerrill01/startup">Source code on GitHub</a></p>
         </footer>
     </body>
