@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 450px;
+}
+
+header {
+    flex: 0 80px;
+}
+
+main {
+    flex: 1 calc(100vh - 160px);
+}
+
+footer {
+    flex: 0 80px;
+}
+
+.navbar-nav {
+    flex: 1;
+    display: flex;
+    /*  overwrite Bootstrap so the menu does not wrap */
+    flex-direction: row !important;
+    justify-content: end;
+    list-style: none;
+    padding: 0 1em;
+
+}
+
+.nav-item {
+    margin: 0.2em 1em
+}
+
+footer a {
+    float: right;
+}
+
+@media (max-height: 600px) {
+    header {
+      display: none;
+    }
+    footer {
+      display: none;
+    }
+    main {
+      flex: 1 100vh;
+    }
+  }
