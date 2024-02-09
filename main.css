@@ -1,4 +1,5 @@
 body {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     min-width: 450px;
@@ -6,22 +7,24 @@ body {
 
 header {
     flex: 0 80px;
+    height: 80px;
 }
 
 main {
-    flex: 1 1 calc(100vh - 152px);
+    padding-top: 86px;
+    padding-bottom: 66px;
+    max-width: 1000px;
+    flex: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    padding-top: 86px;
-    padding-bottom: 66px;
-    max-width: 1000px;
+
 }
 
 footer {
-    flex: 0 80px;
+    flex: 0 60px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
