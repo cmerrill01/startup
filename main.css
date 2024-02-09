@@ -107,3 +107,19 @@ button, input, optgroup, select, textarea {
     margin: 0.5em 0em;
     text-align: center;
 }
+
+.revenue {
+    background-color: rgb(32, 224, 32);
+}
+
+.costs {
+    background-color: red;
+}
+
+.profit {
+    background-color: #212529;
+}
+
+span {
+    font-weight: bold;
+}
