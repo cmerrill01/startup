@@ -5,8 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login | EconoMentor</title>
 
-        <link rel="stylesheet" href="main.css" />
-
         <!-- Include bootstrap css framework -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -14,6 +12,7 @@
             integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="main.css" />
     </head>
 
     <body>
@@ -29,18 +28,18 @@
             </nav>
         </header>
 
-        <main class="container-fluid">
-            <section id="login">
-                <h1>Current Users</h1>
+        <main class="container-fluid bg-light text-dark">
+            <section id="login" class="login-panel">
                 <form method="get" action="gameplay.html">
+                    <h1>Current Users</h1>
                     <input type="text" id="username" placeholder="Username" />
                     <input type="password" id="password" placeholder="Password" />
                     <button type="submit">Login</button>
                 </form>
             </section>
-            <section id="account-creation">
-                <h1>New Users</h1>
+            <section id="account-creation" class="login-panel">
                 <form method="post" action="index.html">
+                    <h1>New Users</h1>
                     <input type="text" id="username" placeholder="Username" />
                     <input type="password" id="password" placeholder="Password" />
                     <input type="email" id="email" placeholder="Email Address" />
@@ -50,8 +49,8 @@
         </main>
 
         <footer class="bg-dark text-light">
-            EconoMentor was created by Chase Merrill at Brigham Young University for C S 260: Web Programming, Winter 2024
-            <a href="https://github.com/cmerrill01/startup">Source code on GitHub</a>
+            <div class="author-name">EconoMentor was created by Chase Merrill at Brigham Young University for C S 260: Web Programming, Winter 2024</div>
+            <a class="footer-link" href="https://github.com/cmerrill01/startup">Source code on GitHub</a>
         </footer>
     </body>
 </html>

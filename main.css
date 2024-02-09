@@ -12,11 +12,18 @@ main {
     flex: 1 calc(100vh - 160px);
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
 footer {
     flex: 0 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0em 2em;
 }
 
 .navbar-nav {
@@ -34,10 +41,6 @@ footer {
     margin: 0.2em 1em
 }
 
-footer a {
-    float: right;
-}
-
 @media (max-height: 600px) {
     header {
       display: none;
@@ -50,8 +53,34 @@ footer a {
     }
   }
 
-  section {
-    flex: 1 1 300px;
+section {
     display: flex;
     flex-direction: column;
-  }
+    justify-content: center;
+}
+
+form {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-panel {
+    flex: 1 1 450px;
+    max-width: 400px;
+}
+
+button, input, optgroup, select, textarea {
+    padding: 0.3em;
+    margin: 0.2em 0em;
+}
+
+.author-name {
+    flex: 5;
+    padding-right: 1em;
+}
+
+.footer-link {
+    flex: 1;
+    padding-left: 1em;
+}
