@@ -17,6 +17,7 @@ main {
     flex-wrap: wrap;
     padding-top: 86px;
     padding-bottom: 46px;
+    max-width: 1000px;
 }
 
 footer {
@@ -60,6 +61,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 600px;
 }
 
 form {
