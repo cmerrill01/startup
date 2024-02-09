@@ -10,6 +10,9 @@ header {
 
 main {
     flex: 1 calc(100vh - 160px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 footer {
@@ -45,4 +48,10 @@ footer a {
     main {
       flex: 1 100vh;
     }
+  }
+
+  section {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
   }
