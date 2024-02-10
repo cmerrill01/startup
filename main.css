@@ -20,7 +20,6 @@ main {
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-
 }
 
 footer {
@@ -91,6 +90,7 @@ button, input, optgroup, select, textarea {
 .footer-link {
     flex: 1;
     padding-left: 1em;
+    text-align: end;
 }
 
 .adam-smith {
@@ -122,4 +122,17 @@ button, input, optgroup, select, textarea {
 
 span {
     font-weight: bold;
+}
+
+.gameplay-screen {
+    width: 100vw;
+    align-items: start;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.gameplay-section {
+    flex: 1;
+    padding: 1em;
+    min-width: 250px;
 }

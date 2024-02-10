@@ -28,8 +28,8 @@
             </nav>
         </header>
 
-        <main class="container-fluid bg-light text-dark">
-            <section id="gameplay-data">
+        <main class="container-fluid bg-light text-dark gameplay-screen">
+            <section id="gameplay-data" class="gameplay-section">
                 <h1>Gameplay Data</h1>
                 <div id="current-assets-display" class="gameplay-data">
                     Current assets: <span id="current-assets">$400</span>
@@ -47,15 +47,7 @@
                     Variable cost per unit: <span id="variable-cost-per-unit">$25</span>
                 </div>            
             </section>
-            <section id="user-input">
-                <h1>Input Price and Quantity</h1>
-                <form method="post" action="gameplay.html">
-                    <input type="number" id="price" placeholder="Enter price" />
-                    <input type="number" id="quantity" placeholder="Enter quantity" />
-                    <button type="submit">Submit price and quantity</button>
-                </form>
-            </section>
-            <section id="last-round-result">
+            <section id="last-round-result" class="gameplay-section">
                 <h1>Last Month's Data</h1>
                 <div id="last-month-revenue-display" class="gameplay-data revenue">
                     Revenue: <span id="last-month-revenue">$200</span>
@@ -67,7 +59,15 @@
                     Profit: <span id="last-month-profit">$80</span>
                 </div>
             </section>
-            <section id="other-players">
+            <section id="user-input" class="gameplay-section">
+                <h1>Input Price and Quantity</h1>
+                <form method="post" action="gameplay.html">
+                    <input type="number" id="price" placeholder="Enter price" />
+                    <input type="number" id="quantity" placeholder="Enter quantity" />
+                    <button type="submit">Submit price and quantity</button>
+                </form>
+            </section>
+            <section id="other-players" class="gameplay-section">
                 <h1>Currently Playing</h1>
                 <table class="table">
                     <thead>
