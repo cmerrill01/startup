@@ -90,3 +90,14 @@ For this deliverable, I created the underlying structure of my web application u
 - **Name Display:** A placeholder for the user's username is shown in the navigation bar on the gameplay and scores pages.
 - **Database Data Placeholder:** The table in the Scores page will pull data from the database
 - **WebSocket Data Placeholder:** The table labeled "Currently Playing" on the gameplay page will show data pushed from the server regarding who is playing and what their score is.
+
+## CSS Deliverable
+
+For this deliverable, I styled my web application so that it has the appearance of the finished product.
+
+- **Header, footer, and main content body:** The header and footer are a constant size, are anchored to the top and bottom of the screen, and disappear if the screen is too short. The main content body adjusts its layout depending on the size of the screen
+- **Navigation elements:** I used and adjusted Bootstrap formatting for the navigation bar at the top of the screen.
+- **Responsive layout:** The gameplay page adjusts its layout depending on the size of the screen
+- **Application elements:** Used card-like formatting to enhance visibility of data the player will use for decision-making
+- **Application text content:** Bootstrap default fonts throughout.
+- **Application images:** The image of Adam Smith is contained in an aside element on the "How to Play" page.
