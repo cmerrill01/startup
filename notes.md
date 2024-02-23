@@ -39,3 +39,18 @@ Root Domain: `chasemerrill-startup.click`
 Caddy is a service that "serves up" files using HTTPS.
 
 HTTPS uses TLS technology to perform a "handshake". It verifies whether the web certificate provided by the server is legitimate.
+
+## Exam review
+
+Types of DNS records:
+- `A`: Address - maps to an IP address
+- `CNAME`: an alias - maps to a different DNS record
+- `SOA`: important information about the owner of the record
+- `TXT`: maps to text - used for Google analytics
+
+In arrow function syntax, if you declare a function on a single line, you don't need an explicit return statement. However, if you put the argument in parentheses, you do need a return statement.
+
+Some important console commands:
+- `ls -la`: list all files in the directory using long format (including hidden files)
+- `chmod`: change the permissions on a file (this includes read, write, and execute permissions for users, group members, and all others)
+- `ssh`: secure shell: securely access a server (usually as an administrator) over a secure network
