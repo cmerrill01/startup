@@ -27,9 +27,9 @@ class Game {
         console.log("Cost: " + cost);
         const profit = this.calculateProfit(revenue, cost);
         console.log("Profit: " + profit);
-        // Update gameplay data
-        // Move to the next month
-        month++;
+        this.assets = this.assets + profit;
+        this.month++;
+        this.updateGameplayData(revenue, cost, profit);
     }
 
     calculateRevenue(price, quantity) {
@@ -47,7 +47,29 @@ class Game {
         return revenue - cost;
     }
 
+    updateGameplayData(revenue, cost, profit) {
+        const revenueEl = document.querySelector("#last-month-revenue");
+        revenueEl.textContent = revenue;
+        const costEl = document.querySelector("#last-month-costs");
+        costEl.textContent = cost;
+        const profitEl = document.querySelector("#last-month-profit");
+        profitEl.textContent = profit;
+        const assetsEl = document.querySelector("#current-assets");
+        assetsEl.textContent = this.assets;
+        const monthEl = document.querySelector("#current-month");
+        monthEl.textContent = this.month;
+    }
 
+    initializeGameplayData() {
+        const minRecQuantEl = document.querySelector("#recommended-quantity-min");
+        minRecQuantEl.textContent = this.demandCurve.minRecommendedQuantity;
+        const maxRecQuantEl = document.querySelector("#recommended-quantity-max");
+        maxRecQuantEl.textContent = this.demandCurve.maxRecommendedQuantity;
+        const fixedCostEl = document.querySelector("#fixed-cost");
+        fixedCostEl.textContent = this.fixedCost;
+        const variableCostEl = document.querySelector("#variable-cost-per-unit");
+        variableCostEl.textContent = this.variableCost;
+    }
 }
 
 class DemandCurve {
@@ -68,10 +90,10 @@ class DemandCurve {
     }
 }
 
-
+const game = new Game();
+game.initializeGameplayData();
 
 // Testing
-const game = new Game();
 console.log("assets: " + game.assets);
 console.log("month: " + game.month);
 console.log("fc: " + game.fixedCost);
