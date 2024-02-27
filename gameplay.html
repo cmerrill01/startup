@@ -61,11 +61,9 @@
             </section>
             <section id="user-input" class="gameplay-section">
                 <h1>Input Price and Quantity</h1>
-                <form method="post" action="gameplay.html">
-                    <input type="number" id="price" placeholder="Enter price" />
-                    <input type="number" id="quantity" placeholder="Enter quantity" />
-                    <button type="submit">Submit price and quantity</button>
-                </form>
+                <input type="number" id="price" placeholder="Enter price" class="gameplay-entry"/>
+                <input type="number" id="quantity" placeholder="Enter quantity" class="gameplay-entry"/>
+                <button type="submit" onclick="game.clickSubmit()" class="gameplay-entry">Submit price and quantity</button>
             </section>
             <section id="other-players" class="gameplay-section">
                 <h1>Currently Playing</h1>

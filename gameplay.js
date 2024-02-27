@@ -70,6 +70,14 @@ class Game {
         const variableCostEl = document.querySelector("#variable-cost-per-unit");
         variableCostEl.textContent = this.variableCost;
     }
+
+    clickSubmit(event) {
+        const priceInputEl = document.querySelector("#price");
+        const quantityInputEl = document.querySelector("#quantity");
+        const price = priceInputEl.value;
+        const quantity = quantityInputEl.value;
+        this.submitPriceAndQuantity(price, quantity);
+    }
 }
 
 class DemandCurve {
