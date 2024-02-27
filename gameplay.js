@@ -21,10 +21,15 @@ class Game {
     }
 
     submitPriceAndQuantity(price, quantity) {
-        // Calculate revenue
-        // Calculate cost
-        // Calculate profit
+        const revenue = this.calculateRevenue(price, quantity);
+        console.log("Revenue: " + revenue);
+        const cost = this.calculateCost(quantity);
+        console.log("Cost: " + cost);
+        const profit = this.calculateProfit(revenue, cost);
+        console.log("Profit: " + profit);
         // Update gameplay data
+        // Move to the next month
+        month++;
     }
 
     calculateRevenue(price, quantity) {
@@ -33,6 +38,16 @@ class Game {
         const quantitySold = (quantity <= quantityDemanded ? quantity : quantityDemanded);
         return price * quantitySold;
     }
+
+    calculateCost(quantity) {
+        return this.fixedCost + this.variableCost * quantity;
+    }
+
+    calculateProfit(revenue, cost) {
+        return revenue - cost;
+    }
+
+
 }
 
 class DemandCurve {
