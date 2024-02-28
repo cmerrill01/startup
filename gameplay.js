@@ -139,8 +139,59 @@ class DemandCurve {
     }
 }
 
+class OtherPlayer {
+    username;
+    currentScore;
+
+    constructor(username, currentScore = 0) {
+        this.username = username;
+        this.currentScore = currentScore;
+    }
+
+    updateScore(currentScore) {
+        this.currentScore = currentScore;
+    }
+}
+
 const game = new Game();
 game.initializeGameplayData();
+
+const otherUsernames = [
+    "adam_smith",
+    "john_keynes",
+    "milton_friedman",
+    "karl_marx",
+    "adam_ferguson",
+    "thomas_malthus",
+    "frédéric_bastiat",
+    "david_ricardo",
+    "john_stuart_mill",
+    "friedrich_hayek"
+];
+
+let otherPlayers = [];
+
+let counter = 0;
+setInterval(() => {
+    // add an new player
+    const index = counter % otherUsernames.length;
+    otherPlayers.push(new OtherPlayer(otherUsernames[index]));
+    
+    // remove a player so the list doesn't grow indefinitely
+    if (otherPlayers.length > 5) otherPlayers.shift();
+
+    // update the players' scores
+    for (const otherPlayer of otherPlayers) {
+        const newScore = otherPlayer.currentScore + Math.round(Math.random() * 5000) - 2000;
+        otherPlayer.updateScore(newScore);
+    }
+
+    // Testing
+    console.log(counter);
+    console.log(JSON.stringify(otherPlayers));
+
+    counter++;
+}, 5000);
 
 // Testing
 console.log("assets: " + game.assets);
