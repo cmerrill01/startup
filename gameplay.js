@@ -145,6 +145,8 @@ class PlayerTracker {
     constructor() {
         this.otherPlayers = [];
         this.generateMockData();
+        this.updateTable = this.updateTable.bind(this);
+        setInterval(this.updateTable, 5000);
     }
 
     generateMockData() {
@@ -181,7 +183,29 @@ class PlayerTracker {
             console.log(JSON.stringify(this.otherPlayers));
 
             counter++;
-        }, 5000);
+        }, 3000);
+    }
+
+    insertTableRow(parentSelector, playerData) {
+        const tableRow = document.createElement("tr");
+        for (const value of Object.values(playerData)) {
+            const tableCell = document.createElement("td");
+            tableCell.textContent = value;
+            tableRow.appendChild(tableCell);
+        }
+        const tableBody = document.querySelector(parentSelector);
+        tableBody.appendChild(tableRow);
+    }
+
+    updateTable() {
+        const selector = "#other-players-table-body";
+        const tableBodyEl = document.querySelector(selector);
+        while (tableBodyEl.firstChild) {
+            tableBodyEl.removeChild(tableBodyEl.firstChild);
+        }
+        for (const player of this.otherPlayers) {
+            this.insertTableRow(selector, player);
+        }
     }
 }
 
