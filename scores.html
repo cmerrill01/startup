@@ -30,35 +30,17 @@
 
         <main class="container-fluid bg-light text-dark">
             <section id="global-scores">
-                <h1>Global Top 5 Scores</h1>
-                <table class="table">
+                <h1>Top Scores</h1>
+                <table class="table" id="scores-table">
                     <thead>
                         <tr>
+                            <th>Game ID</th>
                             <th>Username</th>
                             <th>Score</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>adam_smith</td>
-                            <td>3200</td>
-                        </tr>
-                        <tr>
-                            <td>john_keynes</td>
-                            <td>3000</td>
-                        </tr>
-                        <tr>
-                            <td>milton_friedman</td>
-                            <td>2800</td>
-                        </tr>
-                        <tr>
-                            <td>fred_hayek</td>
-                            <td>2600</td>
-                        </tr>
-                        <tr>
-                            <td>john_keynes</td>
-                            <td>2400</td>
-                        </tr>
+                    <tbody id="scores-table-body">
+                        
                     </tbody>
                 </table>
             </section>
@@ -70,5 +52,6 @@
         </footer>
 
         <script src="index.js"></script>
+        <script src="scores.js"></script>
     </body>
 </html>
