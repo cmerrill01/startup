@@ -23,7 +23,7 @@
                     <li class="nav-item"><a class="nav-link" href="instructions.html">How to Play</a></li>
                     <li class="nav-item"><a class="nav-link" href="gameplay.html">New Game</a></li>
                     <li class="nav-item"><a class="nav-link" href="scores.html">Scores</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html">Log In</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html" id="nav-login">Log In</a></li>
                 </menu>
             </nav>
         </header>
@@ -32,18 +32,18 @@
             <section id="login" class="login-panel">
                 <form method="get" action="gameplay.html">
                     <h1>Current Users</h1>
-                    <input type="text" id="username" placeholder="Username" />
-                    <input type="password" id="password" placeholder="Password" />
-                    <button type="submit">Login</button>
+                    <input type="text" id="login-username" placeholder="Username" />
+                    <input type="password" id="login-password" placeholder="Password" />
+                    <button type="submit" onclick="login()">Login</button>
                 </form>
             </section>
             <section id="account-creation" class="login-panel">
                 <form method="post" action="index.html">
                     <h1>New Users</h1>
-                    <input type="text" id="username" placeholder="Username" />
-                    <input type="password" id="password" placeholder="Password" />
-                    <input type="email" id="email" placeholder="Email Address" />
-                    <button type="submit">Create Account</button>
+                    <input type="text" id="create-username" placeholder="Username" />
+                    <input type="password" id="create-password" placeholder="Password" />
+                    <input type="email" id="create-email" placeholder="Email Address" />
+                    <button type="submit" onclick="createAccount()">Create Account</button>
                 </form>
             </section>
         </main>
@@ -52,5 +52,8 @@
             <div class="author-name">EconoMentor was created by Chase Merrill at Brigham Young University for C S 260: Web Programming, Winter 2024</div>
             <a class="footer-link" href="https://github.com/cmerrill01/startup">Source code on GitHub</a>
         </footer>
+
+        <script src="login.js"></script>
+        <script src="index.js"></script>
     </body>
 </html>
