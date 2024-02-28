@@ -2,6 +2,7 @@ const maxFixedCost = 1000;
 const maxVariableCost = 100;
 const maxIntercept = 1000;
 const maxSlope = 100;
+const maxMonths = 12;
 
 class Game {
     gameId;
@@ -56,7 +57,7 @@ class Game {
         console.log("Profit: " + profit);
         this.assets = this.assets + profit;
         this.month++;
-        if (this.month > 12) {
+        if (this.month > maxMonths) {
             this.finishGame();
         }
         this.updateGameplayData(revenue, cost, profit);
@@ -87,7 +88,7 @@ class Game {
         const assetsEl = document.querySelector("#current-assets");
         assetsEl.textContent = this.assets;
         const monthEl = document.querySelector("#current-month");
-        monthEl.textContent = this.month;
+        monthEl.textContent = (this.month > maxMonths ? "GAME OVER" : this.month);
     }
 
     clickSubmit(event) {
