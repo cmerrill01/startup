@@ -139,6 +139,52 @@ class DemandCurve {
     }
 }
 
+class PlayerTracker {
+    otherPlayers;
+    
+    constructor() {
+        this.otherPlayers = [];
+        this.generateMockData();
+    }
+
+    generateMockData() {
+        const otherUsernames = [
+            "adam_smith",
+            "john_keynes",
+            "milton_friedman",
+            "karl_marx",
+            "adam_ferguson",
+            "thomas_malthus",
+            "frédéric_bastiat",
+            "david_ricardo",
+            "john_stuart_mill",
+            "friedrich_hayek"
+        ];
+
+        let counter = 0;
+        setInterval(() => {
+            // add an new player
+            const index = counter % otherUsernames.length;
+            this.otherPlayers.push(new OtherPlayer(otherUsernames[index]));
+            
+            // remove a player so the list doesn't grow indefinitely
+            if (this.otherPlayers.length > 5) this.otherPlayers.shift();
+
+            // update the players' scores
+            for (const otherPlayer of this.otherPlayers) {
+                const newScore = otherPlayer.currentScore + Math.round(Math.random() * 5000) - 2000;
+                otherPlayer.updateScore(newScore);
+            }
+
+            // Testing
+            console.log(counter);
+            console.log(JSON.stringify(this.otherPlayers));
+
+            counter++;
+        }, 5000);
+    }
+}
+
 class OtherPlayer {
     username;
     currentScore;
@@ -156,42 +202,7 @@ class OtherPlayer {
 const game = new Game();
 game.initializeGameplayData();
 
-const otherUsernames = [
-    "adam_smith",
-    "john_keynes",
-    "milton_friedman",
-    "karl_marx",
-    "adam_ferguson",
-    "thomas_malthus",
-    "frédéric_bastiat",
-    "david_ricardo",
-    "john_stuart_mill",
-    "friedrich_hayek"
-];
-
-let otherPlayers = [];
-
-let counter = 0;
-setInterval(() => {
-    // add an new player
-    const index = counter % otherUsernames.length;
-    otherPlayers.push(new OtherPlayer(otherUsernames[index]));
-    
-    // remove a player so the list doesn't grow indefinitely
-    if (otherPlayers.length > 5) otherPlayers.shift();
-
-    // update the players' scores
-    for (const otherPlayer of otherPlayers) {
-        const newScore = otherPlayer.currentScore + Math.round(Math.random() * 5000) - 2000;
-        otherPlayer.updateScore(newScore);
-    }
-
-    // Testing
-    console.log(counter);
-    console.log(JSON.stringify(otherPlayers));
-
-    counter++;
-}, 5000);
+const playerTracker = new PlayerTracker();
 
 // Testing
 console.log("assets: " + game.assets);
