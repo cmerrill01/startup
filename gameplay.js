@@ -9,6 +9,7 @@ class Game {
     fixedCost;
     variableCost;
     demandCurve;
+    gameOver;
 
     constructor() {
         this.assets = 0;
@@ -18,6 +19,7 @@ class Game {
         // generate random variable cost
         this.variableCost = Math.ceil(Math.random() * maxVariableCost);
         this.demandCurve = new DemandCurve();
+        this.gameOver = false;
     }
 
     submitPriceAndQuantity(price, quantity) {
@@ -29,6 +31,9 @@ class Game {
         console.log("Profit: " + profit);
         this.assets = this.assets + profit;
         this.month++;
+        if (this.month > 12) {
+            gameOver = true;
+        }
         this.updateGameplayData(revenue, cost, profit);
     }
 
@@ -72,11 +77,13 @@ class Game {
     }
 
     clickSubmit(event) {
-        const priceInputEl = document.querySelector("#price");
-        const quantityInputEl = document.querySelector("#quantity");
-        const price = priceInputEl.value;
-        const quantity = quantityInputEl.value;
-        this.submitPriceAndQuantity(price, quantity);
+        if (gameOver === false) {
+            const priceInputEl = document.querySelector("#price");
+            const quantityInputEl = document.querySelector("#quantity");
+            const price = priceInputEl.value;
+            const quantity = quantityInputEl.value;
+            this.submitPriceAndQuantity(price, quantity);
+        }
     }
 }
 
