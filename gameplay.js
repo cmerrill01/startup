@@ -178,10 +178,6 @@ class PlayerTracker {
                 otherPlayer.updateScore(newScore);
             }
 
-            // Testing
-            console.log(counter);
-            console.log(JSON.stringify(this.otherPlayers));
-
             counter++;
         }, 3000);
     }
@@ -227,14 +223,3 @@ const game = new Game();
 game.initializeGameplayData();
 
 const playerTracker = new PlayerTracker();
-
-// Testing
-console.log("assets: " + game.assets);
-console.log("month: " + game.month);
-console.log("fc: " + game.fixedCost);
-console.log("vc: " + game.variableCost);
-const curve = game.demandCurve;
-console.log("intercept: " + curve.intercept);
-console.log("slope: " + curve.slope);
-console.log("minQ: " + curve.minRecommendedQuantity);
-console.log("maxQ: " + curve.maxRecommendedQuantity);
