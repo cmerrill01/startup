@@ -4,6 +4,7 @@ const maxIntercept = 1000;
 const maxSlope = 100;
 
 class Game {
+    gameId;
     assets;
     month;
     fixedCost;
@@ -12,6 +13,7 @@ class Game {
     gameOver;
 
     constructor() {
+        this.setGameId();
         this.assets = 0;
         this.month = 1;
         // generate random fixed cost
@@ -20,6 +22,29 @@ class Game {
         this.variableCost = Math.ceil(Math.random() * maxVariableCost);
         this.demandCurve = new DemandCurve();
         this.gameOver = false;
+    }
+
+    setGameId() {
+        this.gameId = 1;
+        const games = JSON.parse(localStorage.getItem("games"));
+        if (games !== null) {
+            for (const game of games) {
+                if (this.gameId <= game.id) {
+                    this.gameId = game.id + 1;
+                }
+            }
+        }
+    }
+
+    initializeGameplayData() {
+        const minRecQuantEl = document.querySelector("#recommended-quantity-min");
+        minRecQuantEl.textContent = this.demandCurve.minRecommendedQuantity;
+        const maxRecQuantEl = document.querySelector("#recommended-quantity-max");
+        maxRecQuantEl.textContent = this.demandCurve.maxRecommendedQuantity;
+        const fixedCostEl = document.querySelector("#fixed-cost");
+        fixedCostEl.textContent = this.fixedCost;
+        const variableCostEl = document.querySelector("#variable-cost-per-unit");
+        variableCostEl.textContent = this.variableCost;
     }
 
     submitPriceAndQuantity(price, quantity) {
@@ -32,7 +57,7 @@ class Game {
         this.assets = this.assets + profit;
         this.month++;
         if (this.month > 12) {
-            gameOver = true;
+            this.finishGame();
         }
         this.updateGameplayData(revenue, cost, profit);
     }
@@ -65,25 +90,33 @@ class Game {
         monthEl.textContent = this.month;
     }
 
-    initializeGameplayData() {
-        const minRecQuantEl = document.querySelector("#recommended-quantity-min");
-        minRecQuantEl.textContent = this.demandCurve.minRecommendedQuantity;
-        const maxRecQuantEl = document.querySelector("#recommended-quantity-max");
-        maxRecQuantEl.textContent = this.demandCurve.maxRecommendedQuantity;
-        const fixedCostEl = document.querySelector("#fixed-cost");
-        fixedCostEl.textContent = this.fixedCost;
-        const variableCostEl = document.querySelector("#variable-cost-per-unit");
-        variableCostEl.textContent = this.variableCost;
-    }
-
     clickSubmit(event) {
-        if (gameOver === false) {
+        if (this.gameOver === false) {
             const priceInputEl = document.querySelector("#price");
             const quantityInputEl = document.querySelector("#quantity");
             const price = priceInputEl.value;
             const quantity = quantityInputEl.value;
             this.submitPriceAndQuantity(price, quantity);
         }
+    }
+
+    finishGame() {
+        this.gameOver = true;
+        let username = localStorage.getItem("username");
+        if (username === null) {
+            username = "unknown_user";
+        }
+        const game = {
+            id: this.gameId,
+            username: username,
+            score: this.assets,
+        }
+        let games = JSON.parse(localStorage.getItem("games"));
+        if (games === null) {
+            games = [];
+        }
+        games.push(game);
+        localStorage.setItem("games", JSON.stringify(games));
     }
 }
 
