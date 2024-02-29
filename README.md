@@ -101,3 +101,12 @@ For this deliverable, I styled my web application so that it has the appearance 
 - **Application elements:** Used card-like formatting to enhance visibility of data the player will use for decision-making
 - **Application text content:** Bootstrap default fonts throughout.
 - **Application images:** The image of Adam Smith is contained in an aside element on the "How to Play" page.
+
+## JavaScript Deliverable
+
+For this deliverable, I used JavaScript to make my app interactive.
+
+- **JavaScript support for future login:** My application will accept a submission of a username, password, and email (if applicable) from either the Login or Create Account section of the main page. It will store the username in localStorage and display it in the navbar.
+- **JavaScript support for future database data:** When a user completes a game (by playing twelve rounds), their score is stored in localStorage, along with a game ID and the username of the player. This data is shown in a table on the scores page.
+- **JavaScript support for future WebSocket:** My application generates mocked-up data about usernames and scores of other players that are currently playing and displays it in a table at the bottom of the gameplay page.
+- **JavaScript support for your application's interaction logic:** When a user starts a new game (by clicking New Game in the nav bar), random data is generated for fixed and variable costs and a demand curve and displayed on the gameplay page. The user can adjust their price and quantity and submit their choice for twelve rounds. The player's score and other data are adjusted on the gameplay display for each submission.
