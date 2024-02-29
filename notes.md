@@ -54,3 +54,16 @@ Some important console commands:
 - `ls -la`: list all files in the directory using long format (including hidden files)
 - `chmod`: change the permissions on a file (this includes read, write, and execute permissions for users, group members, and all others)
 - `ssh`: secure shell: securely access a server (usually as an administrator) over a secure network
+
+## Web Services
+
+### 29 February 2024
+
+Layers of an internet connection:
+
+Layer        | Example          | Purpose
+-----------------------------------------------------------------------
+Application  | HTTPS            | Functionality like web browsing
+Transport    | TCP              | Moving connection information packets
+Internet     | IP               |	Establishing connections
+Link         | Fiber, hardware  |	Physical connections
