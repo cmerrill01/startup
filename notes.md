@@ -62,7 +62,7 @@ Some important console commands:
 Layers of an internet connection:
 
 Layer        | Example          | Purpose
------------------------------------------------------------------------
+-------------|------------------|--------------------------------------
 Application  | HTTPS            | Functionality like web browsing
 Transport    | TCP              | Moving connection information packets
 Internet     | IP               |	Establishing connections
