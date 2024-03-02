@@ -67,3 +67,15 @@ Application  | HTTPS            | Functionality like web browsing
 Transport    | TCP              | Moving connection information packets
 Internet     | IP               |	Establishing connections
 Link         | Fiber, hardware  |	Physical connections
+
+### 1 March 2024
+
+Using JavaScript packages:
+
+1. Create your project directory
+2. Initialize it for use with NPM by running `npm init -y`
+3. Make sure `.gitignore` file contains `node_modules`
+4. Install any desired packages with `npm install <package name here>`
+5. Add `require('<package name here>')` to your application's JavaScript
+6. Use the code the package provides in your JavaScript
+7. Run your code with `node index.js`
