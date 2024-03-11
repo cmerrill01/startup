@@ -1,7 +1,25 @@
 const maxScores = 5;
-const scores = JSON.parse(localStorage.getItem("games"));
 
-scores.sort((game1, game2) => game2.score - game1.score);
+
+async function loadScores() {
+    let scores = [];
+    try {
+        const res = await fetch('/api/scores');
+        scores = await res.json();
+        localStorage.setItem('games', JSON.stringify(scores));
+    } catch {
+        scores = JSON.parse(localStorage.getItem("games"));
+    }
+
+    scores.sort((game1, game2) => game2.score - game1.score);
+    displayScores(scores, maxScores);
+}
+
+function displayScores(scores, maxScores = 5) {
+    for (const score of scores.slice(0, maxScores)) {
+        insertTableRow("#scores-table-body", score);
+    }
+}
 
 function insertTableRow(parentSelector, gameData) {
     const tableRow = document.createElement("tr");
@@ -14,6 +32,4 @@ function insertTableRow(parentSelector, gameData) {
     tableBody.appendChild(tableRow);
 }
 
-for (const score of scores.slice(0, maxScores)) {
-    insertTableRow("#scores-table-body", score);
-}
+loadScores();
