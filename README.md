@@ -110,3 +110,13 @@ For this deliverable, I used JavaScript to make my app interactive.
 - **JavaScript support for future database data:** When a user completes a game (by playing twelve rounds), their score is stored in localStorage, along with a game ID and the username of the player. This data is shown in a table on the scores page.
 - **JavaScript support for future WebSocket:** My application generates mocked-up data about usernames and scores of other players that are currently playing and displays it in a table at the bottom of the gameplay page.
 - **JavaScript support for your application's interaction logic:** When a user starts a new game (by clicking New Game in the nav bar), random data is generated for fixed and variable costs and a demand curve and displayed on the gameplay page. The user can adjust their price and quantity and submit their choice for twelve rounds. The player's score and other data are adjusted on the gameplay display for each submission.
+
+## Service Deliverable
+
+For this deliverable, I used Node.js to turn my app into a full-stack application with a back-end server and a front-end web client.
+
+- **Create an HTTP service using Node.js and Express:** - My application includes an `index.js` file running on my server using Node.js. It uses Express to listen on port 4000 for HTTP requests.
+- **Frontend served up using Express static middleware:** - My application uses Express static middleware to serve up files in the `public` directory.
+- **Your frontend calls third party service endpoints:** - `instructions.js` uses fetch to call the `quotable.io` API and get a random business quote to display under the image of Adam Smith.
+- **Your backend provides service endpoints:** `index.js` supports `GET` and `POST` endpoints for the `"/scores"` resource.
+- **Your frontend calls your service endpoints:** - `gameplay.js` calls the `GET "/scores"` endpoint to get the list of games so it knows what ID to give each new game. `gameplay.js` also calls the `POST "/scores"` endpoint to save a new score when a game finishes. `scores.js` calls the `GET "/scores"` endpoint so it can list the top 5 recorded scores in memory.
