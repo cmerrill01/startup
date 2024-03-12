@@ -25,9 +25,16 @@ class Game {
         this.gameOver = false;
     }
 
-    setGameId() {
+    async setGameId() {
         this.gameId = 1;
-        const games = JSON.parse(localStorage.getItem("games"));
+        let games = [];
+        try {
+            const res = await fetch('/api/scores');
+            scores = await res.json();
+            localStorage.setItem('games', JSON.stringify(scores));
+        } catch {
+            games = JSON.parse(localStorage.getItem("games"));
+        }
         if (games !== null) {
             for (const game of games) {
                 if (this.gameId <= game.id) {
@@ -48,7 +55,7 @@ class Game {
         variableCostEl.textContent = this.variableCost;
     }
 
-    submitPriceAndQuantity(price, quantity) {
+    async submitPriceAndQuantity(price, quantity) {
         const revenue = this.calculateRevenue(price, quantity);
         console.log("Revenue: " + revenue);
         const cost = this.calculateCost(quantity);
@@ -58,7 +65,7 @@ class Game {
         this.assets = this.assets + profit;
         this.month++;
         if (this.month > maxMonths) {
-            this.finishGame();
+            await this.finishGame();
         }
         this.updateGameplayData(revenue, cost, profit);
     }
@@ -101,7 +108,7 @@ class Game {
         }
     }
 
-    finishGame() {
+    async finishGame() {
         this.gameOver = true;
         let username = localStorage.getItem("username");
         if (username === null) {
@@ -112,6 +119,21 @@ class Game {
             username: username,
             score: this.assets,
         }
+        try {
+            const res = await fetch('api/scores', {
+                method: "POST",
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(game),
+            });
+
+            const games = await res.json();
+            localStorage.setItem('games', JSON.stringify(games));
+        } catch {
+            this.updateScoresLocal(game);
+        }
+    }
+
+    updateScoresLocal(game) {
         let games = JSON.parse(localStorage.getItem("games"));
         if (games === null) {
             games = [];
