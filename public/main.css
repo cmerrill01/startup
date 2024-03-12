@@ -120,7 +120,7 @@ button, input, optgroup, select, textarea {
     background-color: #212529;
 }
 
-span {
+div > span {
     font-weight: bold;
 }
 
