@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
@@ -19,10 +20,11 @@ apiRouter.get('/scores', (_req, res) => {
 });
 
 // Submit a new score
-apiRouter.post('/scores', (req, res) => {
-    scores.push(req.body);
-    res.send(scores);
-})
+apiRouter.post('/scores', async (req, res) => {
+    const score = req.body;
+    await DB.addScore(score);
+    res.send(score);
+});
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
