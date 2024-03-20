@@ -25,6 +25,14 @@ function addScore(score) {
   scoreCollection.insertOne(score);
 }
 
+function getScores() {
+  const query = { username: { $not: { $eq: "unknown_user" } } }
+  const options = { sort: { score: -1 } };
+  const cursor = scoreCollection.find(query, options);
+  return cursor.toArray();
+}
+
 module.exports = {
-  addScore
+  addScore,
+  getScores,
 };

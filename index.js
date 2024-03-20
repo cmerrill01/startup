@@ -15,7 +15,8 @@ app.use(`/api`, apiRouter);
 let scores = [];
 
 // Get scores
-apiRouter.get('/scores', (_req, res) => {
+apiRouter.get('/scores', async (_req, res) => {
+    const scores = await DB.getScores();
     res.send(scores);
 });
 
