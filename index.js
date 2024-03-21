@@ -11,8 +11,11 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// Create an array in memory to store the scores
-let scores = [];
+// Create a new user account
+apiRouter.post('/auth/create', async (req, res) => {
+    const user = await DB.createUser(req.body.username, req.body.email, req.body.password);
+    res.send({ id: user._id, });
+});
 
 // Get scores
 apiRouter.get('/scores', async (_req, res) => {

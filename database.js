@@ -1,4 +1,6 @@
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.username}:${config.password}@${config.hostname}`;
@@ -21,6 +23,21 @@ async function testConnection() {
 }
 testConnection();
 
+async function createUser(username, email, password) {
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    username: username,
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  }
+
+  await userCollection.insertOne(user);
+
+  return user;
+}
+
 function addScore(score) {
   scoreCollection.insertOne(score);
 }
@@ -33,6 +50,7 @@ function getScores() {
 }
 
 module.exports = {
+  createUser,
   addScore,
   getScores,
 };
