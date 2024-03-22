@@ -23,13 +23,6 @@ function displayScores(scores, maxScores = 5) {
 
 function insertTableRow(parentSelector, gameData) {
     const tableRow = document.createElement("tr");
-    /*
-    for (const value of Object.values(gameData)) {
-        const tableCell = document.createElement("td");
-        tableCell.textContent = value;
-        tableRow.appendChild(tableCell);
-    }
-    */
     for (const key in gameData) {
         if (key !== "_id") {
             const value = gameData[key];
