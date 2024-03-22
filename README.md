@@ -115,8 +115,18 @@ For this deliverable, I used JavaScript to make my app interactive.
 
 For this deliverable, I used Node.js to turn my app into a full-stack application with a back-end server and a front-end web client.
 
-- **Create an HTTP service using Node.js and Express:** - My application includes an `index.js` file running on my server using Node.js. It uses Express to listen on port 4000 for HTTP requests.
-- **Frontend served up using Express static middleware:** - My application uses Express static middleware to serve up files in the `public` directory.
-- **Your frontend calls third party service endpoints:** - `instructions.js` uses fetch to call the `quotable.io` API and get a random business quote to display under the image of Adam Smith.
+- **Create an HTTP service using Node.js and Express:** My application includes an `index.js` file running on my server using Node.js. It uses Express to listen on port 4000 for HTTP requests.
+- **Frontend served up using Express static middleware:** My application uses Express static middleware to serve up files in the `public` directory.
+- **Your frontend calls third party service endpoints:** `instructions.js` uses fetch to call the `quotable.io` API and get a random business quote to display under the image of Adam Smith.
 - **Your backend provides service endpoints:** `index.js` supports `GET` and `POST` endpoints for the `"/scores"` resource.
-- **Your frontend calls your service endpoints:** - `gameplay.js` calls the `GET "/scores"` endpoint to get the list of games so it knows what ID to give each new game. `gameplay.js` also calls the `POST "/scores"` endpoint to save a new score when a game finishes. `scores.js` calls the `GET "/scores"` endpoint so it can list the top 5 recorded scores in memory.
+- **Your frontend calls your service endpoints:** `gameplay.js` calls the `GET "/scores"` endpoint to get the list of games so it knows what ID to give each new game. `gameplay.js` also calls the `POST "/scores"` endpoint to save a new score when a game finishes. `scores.js` calls the `GET "/scores"` endpoint so it can list the top 5 recorded scores in memory.
+
+## Login Deliverable
+
+For this deliverable, I used MongoDB to persistently store user data and authentication data.
+
+- **Supports new user registration:** Users can create an account with my application by filling out the New Users form on the `index.html` page. User authentication data is stored in MongoDB, and the password is encrypted using `brcrypt`. The user is sent a cookie as an authentication token.
+- **Supports existing user authentication:** Users can log into my application by filling out the Current Users form on the `index.html` page. The application looks for the username in the MongoDB database, and, if found, tries to match the password to the corresponding password in the database using `brcypt`. If the passwords match, the user is sent a cookie as an authentication token.
+- **Stores application data in MongoDB:** When a logged-in user completes a game, their final score is saved to the MongoDB database. The `scores.html` page displays the top five scores from the database.
+- **Stores and retrieves credentials in MongoDB:** See user registration and authentication items above.
+- **Restricts application functionality based upon authentication:** A user must be logged in to post a new score or view high scores, although a user can play the game without logging in.
