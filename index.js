@@ -14,6 +14,8 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
+app.set('trust proxy', true);
+
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
@@ -70,6 +72,10 @@ secureApiRouter.post('/scores', async (req, res) => {
     await DB.addScore(score);
     res.send(score);
 });
+
+app.use(function (err, req, res, next) {
+    res.status(500).send({ type: err.name, message: err.message });
+  });
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
