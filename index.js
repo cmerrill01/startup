@@ -28,6 +28,11 @@ apiRouter.post('/auth/create', async (req, res) => {
     }
 });
 
+apiRouter.delete('/auth/logout', (_req, res) => {
+    res.clearCookie(authCookieName);
+    res.status(204).end();
+});
+
 var secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
