@@ -46,6 +46,10 @@ function getUserByToken(token) {
   return userCollection.findOne({ token: token });
 }
 
+function getUserByUsername(username) {
+  return userCollection.findOne({ username: username });
+}
+
 function addScore(score) {
   scoreCollection.insertOne(score);
 }
@@ -61,6 +65,7 @@ module.exports = {
   createUser,
   getUser,
   getUserByToken,
+  getUserByUsername,
   addScore,
   getScores,
 };

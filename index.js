@@ -28,6 +28,18 @@ apiRouter.post('/auth/create', async (req, res) => {
     }
 });
 
+apiRouter.post('/auth/login', async (req, res) => {
+    const user = await DB.getUserByUsername(req.body.username);
+    if (user) {
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            setAuthCookie(res, user.token);
+            res.send({ id: user._id});
+            return;
+        }
+    }
+    res.status(401).send({ msg: 'Unauthorized' });
+});
+
 apiRouter.delete('/auth/logout', (_req, res) => {
     res.clearCookie(authCookieName);
     res.status(204).end();
