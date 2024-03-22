@@ -38,6 +38,10 @@ async function createUser(username, email, password) {
   return user;
 }
 
+function getUser(email) {
+  return userCollection.findOne({ email: email });
+}
+
 function addScore(score) {
   scoreCollection.insertOne(score);
 }
@@ -51,6 +55,7 @@ function getScores() {
 
 module.exports = {
   createUser,
+  getUser,
   addScore,
   getScores,
 };

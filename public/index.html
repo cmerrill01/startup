@@ -30,21 +30,21 @@
 
         <main class="container-fluid bg-light text-dark">
             <section id="login" class="login-panel">
-                <form method="get" action="gameplay.html">
+                <div>
                     <h1>Current Users</h1>
                     <input type="text" id="login-username" placeholder="Username" />
                     <input type="password" id="login-password" placeholder="Password" />
-                    <button type="submit" onclick="login()">Login</button>
-                </form>
+                    <button onclick="login()">Login</button>
+                </div>
             </section>
             <section id="account-creation" class="login-panel">
-                <form method="post" action="gameplay.html">
+                <div>
                     <h1>New Users</h1>
                     <input type="text" id="create-username" placeholder="Username" />
                     <input type="password" id="create-password" placeholder="Password" />
                     <input type="email" id="create-email" placeholder="Email Address" />
-                    <button type="submit" onclick="createAccount()">Create Account</button>
-                </form>
+                    <button onclick="createAccount()">Create Account</button>
+                </div>
             </section>
         </main>
 

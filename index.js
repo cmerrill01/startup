@@ -13,8 +13,12 @@ app.use(`/api`, apiRouter);
 
 // Create a new user account
 apiRouter.post('/auth/create', async (req, res) => {
-    const user = await DB.createUser(req.body.username, req.body.email, req.body.password);
-    res.send({ id: user._id, });
+    if (await DB.getUser(req.body.email)) {
+        res.status(409).send({ msg: "Existing user" });
+    } else {
+        const user = await DB.createUser(req.body.username, req.body.email, req.body.password);
+        res.send({ id: user._id, });
+    }
 });
 
 // Get scores
