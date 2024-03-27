@@ -69,6 +69,7 @@ class Game {
             await this.finishGame();
         }
         this.updateGameplayData(revenue, cost, profit);
+        broadcastScore(this.gameId, localStorage.getItem("username"), this.assets);
     }
 
     calculateRevenue(price, quantity) {
@@ -97,7 +98,6 @@ class Game {
         assetsEl.textContent = this.assets;
         const monthEl = document.querySelector("#current-month");
         monthEl.textContent = (this.month > maxMonths ? "GAME OVER" : this.month);
-        broadcastScore();
     }
 
     clickSubmit(event) {
@@ -296,8 +296,15 @@ function updateOtherPlayerScore(gameId, username, score) {
     }
 }
 
-function broadcastScore() {
-    console.log("FIXME: Implement broadcastScore function");
+const socket = {
+    send(msg) {
+        console.log("FIXME: Implement socket object");
+        console.log(`WebSocket message to send: ${msg}`);
+    }
+}
+
+function broadcastScore(gameId, username, score) {
+    socket.send(`{"gameId": "${gameId}", "username": "${username}", "score": ${score}}`)
 }
 
 
