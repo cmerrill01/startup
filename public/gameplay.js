@@ -168,7 +168,7 @@ class PlayerTracker {
         this.otherPlayers = [];
         this.generateMockData();
         this.updateTable = this.updateTable.bind(this);
-        setInterval(this.updateTable, 5000);
+        // setInterval(this.updateTable, 5000);
     }
 
     generateMockData() {
@@ -240,6 +240,56 @@ class OtherPlayer {
         this.currentScore = currentScore;
     }
 }
+
+// WebSocket functionality
+
+let currentGames = [];
+
+function updatePlayerScore(gameId, username, score) {
+    // Convert gameId to string
+    gameId = String(gameId);
+    
+    // Search all <tr> elements in the table body
+    const tableBody = document.getElementById("other-players-table-body");
+    const rows = tableBody.getElementsByTagName("tr");
+    
+    // Check if a <tr> element with the provided gameId exists
+    let rowToUpdate = null;
+    for (let i = 0; i < rows.length; i++) {
+        if (rows[i].id === gameId) {
+            rowToUpdate = rows[i];
+            break;
+        }
+    }
+    
+    // If a matching <tr> element exists, update its contents
+    if (rowToUpdate) {
+        const usernameCell = rowToUpdate.getElementsByTagName("td")[0];
+        const scoreCell = rowToUpdate.getElementsByTagName("td")[1];
+        usernameCell.textContent = username;
+        scoreCell.textContent = score;
+    } else {
+        // Otherwise, create a new <tr> element
+        const newRow = document.createElement("tr");
+        newRow.id = gameId;
+        
+        // Create <td> elements for username and score
+        const usernameCell = document.createElement("td");
+        usernameCell.textContent = username;
+        const scoreCell = document.createElement("td");
+        scoreCell.textContent = score;
+        
+        // Append <td> elements to the new <tr> element
+        newRow.appendChild(usernameCell);
+        newRow.appendChild(scoreCell);
+        
+        // Append the new <tr> element to the table body
+        tableBody.appendChild(newRow);
+    }
+}
+
+
+// End WebSocket functionality
 
 const game = new Game();
 game.initializeGameplayData();
