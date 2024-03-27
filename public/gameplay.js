@@ -30,8 +30,8 @@ class Game {
         let games = [];
         try {
             const res = await fetch('/api/scores');
-            scores = await res.json();
-            localStorage.setItem('games', JSON.stringify(scores));
+            games = await res.json();
+            localStorage.setItem('games', JSON.stringify(games));
         } catch {
             games = JSON.parse(localStorage.getItem("games"));
         }
@@ -96,6 +96,7 @@ class Game {
         assetsEl.textContent = this.assets;
         const monthEl = document.querySelector("#current-month");
         monthEl.textContent = (this.month > maxMonths ? "GAME OVER" : this.month);
+        broadcastScore();
     }
 
     clickSubmit(event) {
@@ -243,12 +244,10 @@ class OtherPlayer {
 
 // WebSocket functionality
 
-let currentGames = [];
-
-function updatePlayerScore(gameId, username, score) {
+function updateOtherPlayerScore(gameId, username, score) {
     // Convert gameId to string
     gameId = String(gameId);
-    
+
     // Search all <tr> elements in the table body
     const tableBody = document.getElementById("other-players-table-body");
     const rows = tableBody.getElementsByTagName("tr");
@@ -286,6 +285,10 @@ function updatePlayerScore(gameId, username, score) {
         // Append the new <tr> element to the table body
         tableBody.appendChild(newRow);
     }
+}
+
+function broadcastScore() {
+    console.log("FIXME: Implement broadcastScore function");
 }
 
 
