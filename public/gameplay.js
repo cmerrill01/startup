@@ -305,10 +305,20 @@ socket.onopen = (event) => {
     console.log("Successfully connected to WebSocket");
 };
 
+// When we receive a score from another player, show it on the table
+socket.onmessage = async (event) => {
+    const text = await event.data.text();
+    const gameData = JSON.parse(text);
+    updateOtherPlayerScore(gameData.gameId, gameData.username, gameData.score);
+}
+
 function broadcastScore(gameId, username, score) {
     socket.send(`{"gameId": "${gameId}", "username": "${username}", "score": ${score}}`);
 }
 
+socket.onclose = (event) => {
+    console.log("Disconnected from WebSocket");
+}
 
 // End WebSocket functionality
 
