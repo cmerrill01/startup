@@ -296,15 +296,17 @@ function updateOtherPlayerScore(gameId, username, score) {
     }
 }
 
-const socket = {
-    send(msg) {
-        console.log("FIXME: Implement socket object");
-        console.log(`WebSocket message to send: ${msg}`);
-    }
-}
+// Set up WebSocket with a secure or unsecure protocol
+const protocol = window.location.protocol === "http:" ? "ws" : "wss";
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+// Let the user know we have opened a websocket connection
+socket.onopen = (event) => {
+    console.log("Successfully connected to WebSocket");
+};
 
 function broadcastScore(gameId, username, score) {
-    socket.send(`{"gameId": "${gameId}", "username": "${username}", "score": ${score}}`)
+    socket.send(`{"gameId": "${gameId}", "username": "${username}", "score": ${score}}`);
 }
 
 
