@@ -14,7 +14,7 @@ class Game {
     gameOver;
 
     constructor() {
-        this.setGameId();
+        this.gameId = generateUUID();
         this.assets = 0;
         this.month = 1;
         // generate random fixed cost
@@ -23,8 +23,9 @@ class Game {
         this.variableCost = Math.ceil(Math.random() * maxVariableCost);
         this.demandCurve = new DemandCurve();
         this.gameOver = false;
-    }
+    }   
 
+    // This function is obsolete if the uuid works
     async setGameId() {
         this.gameId = 1;
         let games = [];
@@ -241,6 +242,14 @@ class OtherPlayer {
         this.currentScore = currentScore;
     }
 }
+
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+} 
 
 // WebSocket functionality
 
