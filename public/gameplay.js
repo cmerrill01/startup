@@ -307,7 +307,7 @@ socket.onopen = (event) => {
 
 // When we receive a score from another player, show it on the table
 socket.onmessage = async (event) => {
-    const text = await event.data.text();
+    const text = await event.data;
     const gameData = JSON.parse(text);
     updateOtherPlayerScore(gameData.gameId, gameData.username, gameData.score);
 }

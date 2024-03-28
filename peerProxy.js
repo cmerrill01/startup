@@ -17,9 +17,12 @@ function peerProxy(httpServer) {
         connections.push(connection);
 
         ws.on('message', function message(data) {
+            messageObject = JSON.parse(data);
+            messageObject.connectionId = connection.id;
+            console.log(JSON.stringify(messageObject));
             connections.forEach((c) => {
                 if (c.id !== connection.id) {
-                    c.ws.send(data);
+                    c.ws.send(JSON.stringify(messageObject));
                 }
             });
         });
