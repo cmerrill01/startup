@@ -19,7 +19,6 @@ function peerProxy(httpServer) {
         ws.on('message', function message(data) {
             messageObject = JSON.parse(data);
             messageObject.connectionId = connection.id;
-            console.log(JSON.stringify(messageObject));
             connections.forEach((c) => {
                 if (c.id !== connection.id) {
                     c.ws.send(JSON.stringify(messageObject));
@@ -38,7 +37,6 @@ function peerProxy(httpServer) {
                 type: 'playerLeft',
                 connectionId: connection.id
             }
-            console.log(JSON.stringify(messageObject));
             connections.forEach((c) => {
                 c.ws.send(JSON.stringify(messageObject));
             });
