@@ -296,6 +296,13 @@ function updateOtherPlayerScore(connectionId, username, score) {
     }
 }
 
+// remove a player from the "currently playing" table if their WebSocket connection breaks
+function removePlayerFromTable(connectionId) {
+    connectionId = String(connectionId);
+    const tableRow = document.getElementById(connectionId);
+    tableRow.remove();
+}
+
 // Set up WebSocket with a secure or unsecure protocol
 const protocol = window.location.protocol === "http:" ? "ws" : "wss";
 const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
@@ -309,7 +316,12 @@ socket.onopen = (event) => {
 socket.onmessage = async (event) => {
     const text = await event.data;
     const gameData = JSON.parse(text);
-    updateOtherPlayerScore(gameData.connectionId, gameData.username, gameData.score);
+
+    if (gameData.type === "updateScore") {
+        updateOtherPlayerScore(gameData.connectionId, gameData.username, gameData.score);
+    } else if (gameData.type === "playerLeft") {
+        removePlayerFromTable(gameData.connectionId);
+    }
 }
 
 function broadcastScore(username, score) {
