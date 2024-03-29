@@ -313,7 +313,7 @@ socket.onmessage = async (event) => {
 }
 
 function broadcastScore(username, score) {
-    socket.send(`{"username": "${username}", "score": ${score}}`);
+    socket.send(`{"type": "updateScore", "username": "${username}", "score": ${score}}`);
 }
 
 socket.onclose = (event) => {

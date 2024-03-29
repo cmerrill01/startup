@@ -33,7 +33,16 @@ function peerProxy(httpServer) {
             if (pos >= 0) {
                 connections.splice(pos, 1);
             }
-        })
+
+            messageObject = {
+                type: 'playerLeft',
+                connectionId: connection.id
+            }
+            console.log(JSON.stringify(messageObject));
+            connections.forEach((c) => {
+                c.ws.send(JSON.stringify(messageObject));
+            });
+        });
 
         ws.on('pong', () => {
             connection.alive = true;
