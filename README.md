@@ -130,3 +130,12 @@ For this deliverable, I used MongoDB to persistently store user data and authent
 - **Stores application data in MongoDB:** When a logged-in user completes a game, their final score is saved to the MongoDB database. The `scores.html` page displays the top five scores from the database.
 - **Stores and retrieves credentials in MongoDB:** See user registration and authentication items above.
 - **Restricts application functionality based upon authentication:** A user must be logged in to post a new score or view high scores, although a user can play the game without logging in.
+
+## WebSocket Deliverable
+
+For this deliverable, I used WebSocket to send real-time data between users of the application.
+
+- **Backend listens for WebSocket connection:** I added a `peerProxy.js` file that upgrades standard HTTP to a WebSocket connection and listens for WebSocket messages.
+- **Frontend makes WebSocket connection:** `gameplay.js` includes functionality that makes a request to upgrade its HTTP or HTTPS connection with the server to an unsecure or secure WebSocket connection.
+- **Data sent over WebSocket connection:** When a player submits their price and quantity on the `gameplay.html` page, their updated score is sent from `gameplay.js` via WebSocket to the server (`peerProxy.js`), which broadcasts it to all other players with a WebSocket connection. Additionally, when a player leaves the game or otherwise loses their WebSocket connection, a message is sent from the server to notify all other players.
+- **WebSocket data displayed in the application interface:** When `gameplay.js` receives a WebSocket message with another player's score, it adds the player's username and score to the Currently Playing table on `gameplay.html` by manipulating the DOM. When it receives a message indicating that a player left the game, that player's information is removed from the Currently Playing table in a similar manner.
