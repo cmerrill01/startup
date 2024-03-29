@@ -69,7 +69,7 @@ class Game {
             await this.finishGame();
         }
         this.updateGameplayData(revenue, cost, profit);
-        broadcastScore(this.gameId, localStorage.getItem("username"), this.assets);
+        broadcastScore(localStorage.getItem("username"), this.assets);
     }
 
     calculateRevenue(price, quantity) {
@@ -253,9 +253,9 @@ function generateUUID() {
 
 // WebSocket functionality
 
-function updateOtherPlayerScore(gameId, username, score) {
-    // Convert gameId to string
-    gameId = String(gameId);
+function updateOtherPlayerScore(connectionId, username, score) {
+    // Convert connectionId to string
+    connectionId = String(connectionId);
 
     // Search all <tr> elements in the table body
     const tableBody = document.getElementById("other-players-table-body");
@@ -264,7 +264,7 @@ function updateOtherPlayerScore(gameId, username, score) {
     // Check if a <tr> element with the provided gameId exists
     let rowToUpdate = null;
     for (let i = 0; i < rows.length; i++) {
-        if (rows[i].id === gameId) {
+        if (rows[i].id === connectionId) {
             rowToUpdate = rows[i];
             break;
         }
@@ -279,7 +279,7 @@ function updateOtherPlayerScore(gameId, username, score) {
     } else {
         // Otherwise, create a new <tr> element
         const newRow = document.createElement("tr");
-        newRow.id = gameId;
+        newRow.id = connectionId;
         
         // Create <td> elements for username and score
         const usernameCell = document.createElement("td");
@@ -309,11 +309,11 @@ socket.onopen = (event) => {
 socket.onmessage = async (event) => {
     const text = await event.data;
     const gameData = JSON.parse(text);
-    updateOtherPlayerScore(gameData.gameId, gameData.username, gameData.score);
+    updateOtherPlayerScore(gameData.connectionId, gameData.username, gameData.score);
 }
 
-function broadcastScore(gameId, username, score) {
-    socket.send(`{"gameId": "${gameId}", "username": "${username}", "score": ${score}}`);
+function broadcastScore(username, score) {
+    socket.send(`{"username": "${username}", "score": ${score}}`);
 }
 
 socket.onclose = (event) => {
