@@ -25,26 +25,6 @@ class Game {
         this.gameOver = false;
     }   
 
-    // This function is obsolete if the uuid works
-    async setGameId() {
-        this.gameId = 1;
-        let games = [];
-        try {
-            const res = await fetch('/api/scores');
-            games = await res.json();
-            localStorage.setItem('games', JSON.stringify(games));
-        } catch {
-            games = JSON.parse(localStorage.getItem("games"));
-        }
-        if (games !== null) {
-            for (const game of games) {
-                if (this.gameId <= game.id) {
-                    this.gameId = game.id + 1;
-                }
-            }
-        }
-    }
-
     initializeGameplayData() {
         const minRecQuantEl = document.querySelector("#recommended-quantity-min");
         minRecQuantEl.textContent = this.demandCurve.minRecommendedQuantity;
@@ -163,86 +143,6 @@ class DemandCurve {
     }
 }
 
-class PlayerTracker {
-    otherPlayers;
-    
-    constructor() {
-        this.otherPlayers = [];
-        this.generateMockData();
-        this.updateTable = this.updateTable.bind(this);
-        // setInterval(this.updateTable, 5000);
-    }
-
-    generateMockData() {
-        const otherUsernames = [
-            "adam_smith",
-            "john_keynes",
-            "milton_friedman",
-            "karl_marx",
-            "adam_ferguson",
-            "thomas_malthus",
-            "frédéric_bastiat",
-            "david_ricardo",
-            "john_stuart_mill",
-            "friedrich_hayek"
-        ];
-
-        let counter = 0;
-        setInterval(() => {
-            // add an new player
-            const index = counter % otherUsernames.length;
-            this.otherPlayers.push(new OtherPlayer(otherUsernames[index]));
-            
-            // remove a player so the list doesn't grow indefinitely
-            if (this.otherPlayers.length > 5) this.otherPlayers.shift();
-
-            // update the players' scores
-            for (const otherPlayer of this.otherPlayers) {
-                const newScore = otherPlayer.currentScore + Math.round(Math.random() * 5000) - 2000;
-                otherPlayer.updateScore(newScore);
-            }
-
-            counter++;
-        }, 3000);
-    }
-
-    insertTableRow(parentSelector, playerData) {
-        const tableRow = document.createElement("tr");
-        for (const value of Object.values(playerData)) {
-            const tableCell = document.createElement("td");
-            tableCell.textContent = value;
-            tableRow.appendChild(tableCell);
-        }
-        const tableBody = document.querySelector(parentSelector);
-        tableBody.appendChild(tableRow);
-    }
-
-    updateTable() {
-        const selector = "#other-players-table-body";
-        const tableBodyEl = document.querySelector(selector);
-        while (tableBodyEl.firstChild) {
-            tableBodyEl.removeChild(tableBodyEl.firstChild);
-        }
-        for (const player of this.otherPlayers) {
-            this.insertTableRow(selector, player);
-        }
-    }
-}
-
-class OtherPlayer {
-    username;
-    currentScore;
-
-    constructor(username, currentScore = 0) {
-        this.username = username;
-        this.currentScore = currentScore;
-    }
-
-    updateScore(currentScore) {
-        this.currentScore = currentScore;
-    }
-}
-
 function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0,
@@ -336,5 +236,3 @@ socket.onclose = (event) => {
 
 const game = new Game();
 game.initializeGameplayData();
-
-const playerTracker = new PlayerTracker();
