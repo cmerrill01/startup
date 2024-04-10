@@ -1,3 +1,4 @@
 .vscode/
 node_modules/
-/dbConfig.json
+dbConfig.json
+*/dbConfig.json
