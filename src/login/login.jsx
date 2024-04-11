@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { MessageDialog } from './messageDialog';
 
-export function Login() {
+export function Login({ onLogin }) {
     const [loginUsername, setLoginUsername] = React.useState("");
     const [loginPassword, setLoginPassword] = React.useState("");
     const [createUsername, setCreateUsername] = React.useState("");
@@ -20,16 +20,16 @@ export function Login() {
                 }),
                 headers: { "content-type": "application/json; charset=UTF-8" }
             });
-    
+
             console.log(response.status);
-    
+
             await accountSuccessCheck(response, loginUsername);
-    
+
         } catch (error) {
             console.error("Error logging in:", error);
         }
     }
-    
+
     async function createAccount() {
         try {
             const response = await fetch("api/auth/create", {
@@ -41,19 +41,20 @@ export function Login() {
                 }),
                 headers: { "content-type": "application/json; charset=UTF-8" }
             });
-    
+
             console.log(response.status);
-        
+
             await accountSuccessCheck(response, createUsername);
-    
+
         } catch (error) {
             console.error("Error creating account:", error);
         }
     }
-    
+
     async function accountSuccessCheck(response, username) {
         if (response.ok) {
             localStorage.setItem("username", username);
+            onLogin();
         } else {
             const body = await response.json();
             setDisplayError(`⚠ Error: ${body.msg}`);
@@ -66,17 +67,17 @@ export function Login() {
                 <div>
                     <h1>Current Users</h1>
                     <input
-                        className="form-control" 
-                        type="text" 
-                        id="login-username" 
+                        className="form-control"
+                        type="text"
+                        id="login-username"
                         placeholder="Username"
                         value={loginUsername}
                         onChange={(e) => setLoginUsername(e.target.value)}
                     />
-                    <input 
+                    <input
                         className="form-control"
-                        type="password" 
-                        id="login-password" 
+                        type="password"
+                        id="login-password"
                         placeholder="Password"
                         value={loginPassword}
                         onChange={(e) => setLoginPassword(e.target.value)}
@@ -87,26 +88,26 @@ export function Login() {
             <section id="account-creation" className="login-panel">
                 <div>
                     <h1>New Users</h1>
-                    <input 
+                    <input
                         className="form-control"
-                        type="text" 
-                        id="create-username" 
+                        type="text"
+                        id="create-username"
                         placeholder="Username"
                         value={createUsername}
                         onChange={(e) => setCreateUsername(e.target.value)}
                     />
-                    <input 
+                    <input
                         className="form-control"
-                        type="password" 
-                        id="create-password" 
-                        placeholder="Password" 
+                        type="password"
+                        id="create-password"
+                        placeholder="Password"
                         value={createPassword}
                         onChange={(e) => setCreatePassword(e.target.value)}
                     />
-                    <input 
+                    <input
                         className="form-control"
-                        type="email" 
-                        id="create-email" 
+                        type="email"
+                        id="create-email"
                         placeholder="Email Address"
                         value={createEmail}
                         onChange={(e) => setCreateEmail(e.target.value)}

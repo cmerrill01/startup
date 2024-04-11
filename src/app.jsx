@@ -8,6 +8,12 @@ import { Scores } from './scores/scores';
 import { Instructions } from './instructions/instructions';
 
 export default function App() {
+    const [username, setUsername] = React.useState(localStorage.getItem("username") || "");
+
+    const onLoginLogout = () => {
+        setUsername(localStorage.getItem("username") || "");
+    }
+
     return (
         <BrowserRouter>
             <div className='body'>
@@ -18,13 +24,13 @@ export default function App() {
                             <li className="nav-item"><NavLink className="nav-link" to="instructions">How to Play</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" to="gameplay">New Game</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link" to="scores">Scores</NavLink></li>
-                            <li className="nav-item"><NavLink className="nav-link" to="" id="nav-login">Log In</NavLink></li>
+                            <NavLogin username={username} onLogout={onLoginLogout} />
                         </menu>
                     </nav>
                 </header>
 
                 <Routes>
-                    <Route path='/' element={<Login />} exact />
+                    <Route path='/' element={<Login onLogin={onLoginLogout} />} exact />
                     <Route path='/gameplay' element={<Gameplay />} />
                     <Route path='/scores' element={<Scores />} />
                     <Route path='/instructions' element={<Instructions />} />
@@ -38,6 +44,31 @@ export default function App() {
             </div>
         </BrowserRouter>
     );
+}
+
+function NavLogin({ username, onLogout }) {
+
+    const text = username ? "Welcome, " + username + " (Log Out)" : "Log In";
+    let logout;
+    if (username) {
+        logout = async function () {
+            try {
+                const response = await fetch("api/auth/logout", { method: "delete" });
+                if (response.ok) {
+                    localStorage.removeItem('username');
+                    onLogout();
+                    console.log("Logout successful");
+                } else {
+                    console.error("Logout failed:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error during logout:", error);
+            }
+        }
+    }
+    return (
+        <li className="nav-item"><NavLink className="nav-link" to="" id="nav-login" onClick={() => logout()}>{text}</NavLink></li>
+    )
 }
 
 function NotFound() {
