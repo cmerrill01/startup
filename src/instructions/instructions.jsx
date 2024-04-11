@@ -14,18 +14,6 @@ export function Instructions() {
             .catch();
     }, []);
 
-    fetch('https://api.quotable.io/quotes/random?tags=business')
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-
-            console.log("author: " + data[0].author);
-            author = data[0].author;
-
-            console.log("quote: " + data[0].content);
-            quote = data[0].content;
-        });
-
     return (
         <main className="container-fluid bg-light text-dark">
             <section id="how-to-play">
