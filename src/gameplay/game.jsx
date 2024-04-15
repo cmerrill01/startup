@@ -63,20 +63,59 @@ export function Game() {
         return calculateRevenue() - calculateCost();
     }
 
-    function submit() {
+    async function updateGameplayData() {
+        const newRevenue = calculateRevenue();
+        const newCost = calculateCost();
+        const newProfit = calculateProfit();
+
+        setRevenue(newRevenue);
+        setCost(newCost);
+        setProfit(newProfit);
+        setAssets(assets + newProfit);
+        setMonth(month + 1);
+    }
+
+    function updateScoresLocal(game) {
+        let games = JSON.parse(localStorage.getItem("games"));
+        if (games === null) {
+            games = [];
+        }
+        games.push(game);
+        localStorage.setItem("games", JSON.stringify(games));
+    }
+
+    async function finishGame() {
+        setGameOver(true);
+        let username = localStorage.getItem("username");
+        if (username === null) {
+            username = "unknown_user";
+        }
+        const game = {
+            id: gameId,
+            username: username,
+            score: assets,
+        }
+        try {
+            const res = await fetch('api/scores', {
+                method: "POST",
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(game),
+            });
+
+            const games = await res.json();
+            localStorage.setItem('games', JSON.stringify(games));
+        } catch {
+            updateScoresLocal(game);
+        }
+    }
+
+    async function submit() {
         if (!gameOver) {
-            const newRevenue = calculateRevenue();
-            const newCost = calculateCost();
-            const newProfit = calculateProfit();
+            await updateGameplayData(); 
 
-            setRevenue(newRevenue);
-            setCost(newCost);
-            setProfit(newProfit);
-            setAssets(assets + newProfit);
-            setMonth(month + 1);            
-
-            if (month > maxMonths) {
-                // implement finish game
+            if (month >= maxMonths) {
+                finishGame();
+                setMonth("GAME OVER");
             }
             // implement broadcast score
         }
