@@ -139,3 +139,12 @@ For this deliverable, I used WebSocket to send real-time data between users of t
 - **Frontend makes WebSocket connection:** `gameplay.js` includes functionality that makes a request to upgrade its HTTP or HTTPS connection with the server to an unsecure or secure WebSocket connection.
 - **Data sent over WebSocket connection:** When a player submits their price and quantity on the `gameplay.html` page, their updated score is sent from `gameplay.js` via WebSocket to the server (`peerProxy.js`), which broadcasts it to all other players with a WebSocket connection. Additionally, when a player leaves the game or otherwise loses their WebSocket connection, a message is sent from the server to notify all other players.
 - **WebSocket data displayed in the application interface:** When `gameplay.js` receives a WebSocket message with another player's score, it adds the player's username and score to the Currently Playing table on `gameplay.html` by manipulating the DOM. When it receives a message indicating that a player left the game, that player's information is removed from the Currently Playing table in a similar manner.
+
+## React Deliverable
+
+For this deliverable, I converted my application to a modern web application using the web framework React.
+
+- **Bundled using Vite:** Uses vite for both development debugging and production building.
+- **Multiple functional react components:** The app uses `app.jsx` to display the header and footer and to handle the router. Each of the pages now consists of one or more React components contained in one or more `.jsx` files in the `src` folder.
+- **React router:** The React router is located in the `app.jsx` file and provides links to the `instruction`, `login`, `gameplay`, and `scores` components.
+- **React hooks:** The `Scores` component uses `React.useEffect` to call the asynchronous function to pull scores from the database and display them on the page.
