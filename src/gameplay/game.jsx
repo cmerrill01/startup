@@ -38,7 +38,7 @@ const demandCurve = new DemandCurve(maxIntercept, maxSlope);
 const fixedCost = Math.ceil(Math.random() * maxFixedCost);
 const variableCost = Math.ceil(Math.random() * maxVariableCost);
 
-export function Game() {
+export function Game({ socket }) {
     const [gameOver, setGameOver] = useState(false);
     const [assets, setAssets] = useState(0);
     const [month, setMonth] = useState(1);
@@ -98,7 +98,7 @@ export function Game() {
         try {
             const res = await fetch('api/scores', {
                 method: "POST",
-                headers: {'content-type': 'application/json'},
+                headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(game),
             });
 
@@ -109,15 +109,19 @@ export function Game() {
         }
     }
 
+    function broadcastScore() {
+        socket.send(`{"type": "updateScore", "username": "${localStorage.getItem("username") ? localStorage.getItem("username") : "unknown_user"}", "score": ${assets}}`);
+    }
+
     async function submit() {
         if (!gameOver) {
-            await updateGameplayData(); 
+            await updateGameplayData();
 
             if (month >= maxMonths) {
                 finishGame();
                 setMonth("GAME OVER");
             }
-            // implement broadcast score
+            broadcastScore();
         }
     }
 

@@ -1,24 +1,25 @@
 import React from 'react';
-import { Game } from './game'
+import { Game } from './game';
+import { OtherPlayers } from './otherPlayers';
+
+// Set up WebSocket with a secure or unsecure protocol
+const protocol = window.location.protocol === "http:" ? "ws" : "wss";
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+// Let the user know we have opened a websocket connection
+socket.onopen = (event) => {
+    console.log("Successfully connected to WebSocket");
+};
+
+socket.onclose = (event) => {
+    console.log("Disconnected from WebSocket");
+}
 
 export function Gameplay() {
-    return (
+        return (
         <main className="container-fluid bg-light text-dark gameplay-screen">
-            <Game maxFixedCost={1000} maxVariableCost={100} maxIntercept={1000} maxSlope={100} maxMonths={12} />
-            <section id="other-players" className="gameplay-section">
-                <h1>Currently Playing</h1>
-                <table className="table" id="other-players-table">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Current score</th>
-                        </tr>
-                    </thead>
-                    <tbody id="other-players-table-body">
-
-                    </tbody>
-                </table>
-            </section>
+            <Game socket={socket} />
+            <OtherPlayers socket={socket} />
         </main>
     );
 }
